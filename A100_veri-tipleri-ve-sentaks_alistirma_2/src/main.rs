@@ -2,26 +2,26 @@
 //
 // Ornek 1: For donguleri asagidaki gibidir.
 
-// fn main() {
-//     let array = [10, 20, 30, 40];
-//     print!("Array'i iterate ediyoruz:");
-//     for n in array {
-//         print!(" {n}");
-//     }
-//     println!();
-//
-//     print!("Bir exclusive range'i iterate ediyoruz:");
-//     for i in 0..3 {
-//         print!(" {}", array[i]);
-//     }
-//     println!();
-//
-//     print!("Bir inclusive range'i iterate ediyoruz:");
-//     for i in 0..=3 {
-//         print!(" {}", array[i]);
-//     }
-//     println!();
-// }
+fn main() {
+    let array = [10, 20, 30, 40];
+    print!("Array'i iterate ediyoruz:");
+    for n in array {
+        print!(" {n}");
+    }
+    println!();
+
+    print!("Bir exclusive range'i iterate ediyoruz:");
+    for i in 0..3 {
+        print!(" {}", array[i]);
+    }
+    println!();
+
+    print!("Bir inclusive range'i iterate ediyoruz:");
+    for i in 0..=3 {
+        print!(" {}", array[i]);
+    }
+    println!();
+}
 
 // 1. Matrisin transpozunu alan fonksiyonu yaziniz.
 // Bir matrisin sol ust kosesinden sag alt kosesine cizilen bir cizgide
@@ -53,27 +53,27 @@
 // 5. Bu transpoze fonksiyonunu unutmayin.
 // 6. Daha az memory kullanarak bu kodu yazabilir miydiniz? Dusunun.
 
-#![allow(unused_variables, dead_code)]
-
-fn transpoze(matrix: [[i32; 3]; 3]) -> [[i32; 3]; 3] {
-    todo!("Transpose fonksiyonunu yazin.")
-}
-
-fn pretty_print(matrix: &[[i32; 3]; 3]) {
-    todo!("Bir matrisi alip guzelce matris seklinde bastiran fonksiyonu yazin.")
-}
-
-fn main() {
-    let matris = [
-        [101, 102, 103],
-        [201, 202, 203],
-        [301, 302, 303],
-    ];
-
-    println!("matris:");
-    pretty_print(&matris);
-
-    let transpoze = transpoze(matris);
-    println!("transpoze edilmis matris:");
-    pretty_print(&transpoze);
-}
+// #![allow(unused_variables, dead_code)]
+//
+// fn transpoze(matrix: [[i32; 3]; 3]) -> [[i32; 3]; 3] {
+//     todo!("Transpose fonksiyonunu yazin.")
+// }
+//
+// fn pretty_print(matrix: &[[i32; 3]; 3]) {
+//     todo!("Bir matrisi alip guzelce matris seklinde bastiran fonksiyonu yazin.")
+// }
+//
+// fn main() {
+//     let matris = [
+//         [101, 102, 103],
+//         [201, 202, 203],
+//         [301, 302, 303],
+//     ];
+//
+//     println!("matris:");
+//     pretty_print(&matris);
+//
+//     let transpoze = transpoze(matris);
+//     println!("transpoze edilmis matris:");
+//     pretty_print(&transpoze);
+// }
