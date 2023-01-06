@@ -84,3 +84,43 @@
 // }
 
 // ✨ Asama 14. Lexical Scopelar ve Shadowing (Golgeleme)
+
+// fn main() {
+//     let a = 10;
+//     println!("en basta: {a}");
+//
+//     {
+//         let a = "hello";
+//         println!("ic scope: {a}");
+//
+//         let a = true;
+//         println!("shadowlanmis ic scopetaki a: {a}");
+//     }
+//
+//     println!("dis scopeta a: {a}");
+// }
+
+// ✨✨ Asama 15. Hafiza Yonetimi
+
+// Programlama dilleri hafiza yonetimi bakimindan ikiye ayrilir:
+// 1. Manuel hafiza yonetimi ile full kontrol verenler: C, C++, Pascal.
+// 2. Otomatik hafiza yonetimi ile guvenlik verenler: Java, Python, Go, Haskell.
+
+// Rust ise bambaska bir dildir. Hem kontrol hem guvenligi derleme zamaninda dogru sekilde hafiza yonetimini
+// program yazan icin zorlayarak yeni bir bakis acisi getirir.
+// Bunu ownership (sahiplik) sistemiyle yapar.
+
+// Baslamadan once gelin stack ve heap kavramlarina bir bakis atalim.
+
+// Stack: Yerel değişkenler için sürekli bellek alanı.
+// * Değerlerin derleme zamanında bilinen sabit boyutları vardır.
+// * Son derece hızlı: sadece bir stack pointeri tasimak gerekir.
+// * Yönetimi kolaydır: fonksiyon çağrılarını takip eder.
+// * Mükemmel bellek yerelliği(locality).
+// * Asagiya dogru buyur.
+//
+// Heap: Fonksiyon çağrıları dışında değerlerin depolanması.
+// * Değerler çalışma zamanında belirlenen dinamik boyutlara sahiptir.
+// * Yığından biraz daha yavaştır: biraz bookkeeping isi gerekir.
+// * Bellek yerelliği garantisi yoktur. Dipnot: Nedenini isterseniz aciklayabilirim.
+// * Yukari dogru buyur.
