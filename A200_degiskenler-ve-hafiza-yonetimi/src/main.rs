@@ -124,3 +124,143 @@
 // * Yığından biraz daha yavaştır: biraz bookkeeping isi gerekir.
 // * Bellek yerelliği garantisi yoktur. Dipnot: Nedenini isterseniz aciklayabilirim.
 // * Yukari dogru buyur.
+
+
+// ✨✨ Asama 16. Stack (Yigin) Hafiza
+// String oluşturmak sabit boyutlu verileri yığına, dinamik boyutlu verileri ise heap'e yerleştirir:
+
+fn main() {
+    let s1 = String::from("Hello");
+}
+
+// ```bob
+//  Stack                             Heap
+// .- - - - - - - - - - - - - -.     .- - - - - - - - - - - - - - - -.
+// :                           :     :                               :
+// :    s1                     :     :                               :
+// :   +-----------+-------+   :     :   +----+----+----+----+----+  :
+// :   | ptr       |   o---+---+-----+-->| H  | e  | l  | l  | o  |  :
+// :   | len       |     5 |   :     :   +----+----+----+----+----+  :
+// :   | capacity  |     5 |   :     :                               :
+// :   +-----------+-------+   :     :                               :
+// :                           :     `- - - - - - - - - - - - - - - -'
+// `- - - - - - - - - - - - - -'
+// ```
+//
+// `String`in arkasinda `Vec` dedigimiz genisleyip kuculebilen ve bu genislemeyi heap uzerinde saglayabilen bir veri yapisi bulunur.
+// Bu heap uzerinde hafiza alimini saglayan sey ise `Sistem Hafiza Ayiricisi` dedigimiz Rust'in varsayilan olarak kullandigi hafiza ayiricisidir. 
+// Kendiniz hafiza ayiricisi gelistirebilir ve Rust'a baska hafiza ayiricilari atayabilirsiniz. Hafiza ayiricilarinin spesifik ozelliklerini "Advanced Rust" dersinde gosterecegiz.
+
+// ✨✨ Asama 17. Manuel Hafiza Yonetimi
+
+// Hafiza kullanan bir C kodu yazdigimizda hafiza alanini kendimiz ayirip kendimiz isletim sistemine geri veririz.
+// C programlarinda hafizayi geri verme islemini `free` fonksiyonu, hafiza ayirma islemini ise `malloc` fonksiyonu yapar.
+// 
+// ```c
+// void foo(size_t n) {
+//     int* int_array = (int*)malloc(n * sizeof(int));
+//     //
+//     // ... lots of code
+//     //
+//     free(int_array);
+// }
+// ```
+//
+// Fonksiyon `malloc` ve `free` arasında erken dönerse bellek sızdırılır: işaretçi kaybolur ve belleği ayıramayız.
+
+// ✨✨ Asama 18. Scope Tabanli Hafiza Yonetimi
+
+// Kurucular ve yıkıcılar, bir nesnenin yaşam süresine bağlanmanızı sağlar.
+//
+// Bir işaretçiyi bir nesneye sararak, nesne yok edildiğinde belleği boşaltabilirsiniz.
+// Derleyici, bir istisna ortaya çıksa bile bunun gerçekleşeceğini garanti eder.
+//
+// Bu genellikle kaynak edinimi başlatma (RAII) olarak adlandırılır ve size akıllı işaretçiler sağlar.
+//
+// Scope tabanli hafiza yonetiminde ise isler farkli isler. Bu C++'in hafiza yonetim sistemidir.
+//
+// ```c++
+// void merhaba_de(std::unique_ptr<Insan> insan) {
+//     std::cout << "Merhaba " << insan->isim << std::endl;
+// }
+// ```
+//
+// * `std::unique_ptr` nesnesi stackte ayrilir ve heap üzerinde ayrilan belleğe işaret eder.
+// * `merhaba_de`'nin sonunda, `std::unique_ptr` yıkıcısı çalışacaktır.
+// * Yıkıcı, işaret ettiği `Insan` nesnesini serbest bırakır.
+//
+// Bir fonksiyona sahiplik aktarılırken özel move kurucuları kullanılır:
+//
+// ```c++
+// std::unique_ptr<Insan> insan = insan_bul("Mesude");
+// merhaba_de(std::move(insan));
+// ```
+
+// ✨✨ Asama 19. Otomatik Hafiza Yonetimi - Garbage Collection (Cop Toplama)
+
+// Scope tabanli ve manuel hafiza yonetimine alternatif olan bu yontemde:
+// * Programci acikca hafizayi kendisi ayirip, geri vermez.
+// * Bir cop toplayıcı kullanılmayan belleği bulur ve programcı için ayırır.
+//
+// ```java
+// void merhabaDe(Insan insan) {
+//     System.out.println("Merhaba " + insan.getIsim());
+// }  
+// ```
+
+// ✨✨ Asama 20. Rust'ta Hafiza Yonetimi
+
+// Rust'ta hafiza yonetimi ise bunlarin bir mixidir:
+// * Java gibi güvenli ve doğrudur, ancak çöp toplayıcısı yoktur.
+// * Hangi soyutlamayı (veya soyutlama kombinasyonunu) seçtiğinize bağlı olarak,
+// tek bir benzersiz işaretçi, referans sayımlı veya atomik referans sayımlı olabilir.
+// * C++ gibi scope tabanlıdır, ancak derleyici tam scope tabanli hafiza yonetimini zorunlu kılar.
+// * Bir Rust kullanıcısı durum için doğru soyutlamayı seçebilir (ZCA - zero-cost abstractions),
+// hatta bazılarının C gibi çalışma zamanında hiçbir maliyeti yoktur.
+
+// Tum bunlarin hepsi bir sonraki konumuz olan `Ownership` (Sahiplik) modeli ile yapilir.
+// Soru: Hocam bu dediginiz seyleri Rust neler ile yapiyor?
+// Yanit: Rust'in kendine ait RAII (Resource Acquisition Is Initialization - kaynak edinimi başlatma)
+// bunlar, Box, Vec, Rc, veya Arc tir.
+//
+// Soru: C++'in yikicilarinin benzeri Rust'ta var mi?
+// Yanit: Evet var, `Drop` traiti bu isi gorur.
+
+// ✨ Asama 21. Hafiza yonetim sistemlerinin bir karsilastirmasi
+
+// ++++++ Farklı Bellek Yönetimi Tekniklerinin Artıları ++++++
+//
+// C gibi manuel:
+// * Çalışma zamanı ek yükü yok.
+//
+// Java gibi otomatik:
+// * Tam otomatik.
+// * Güvenli ve doğru.
+//
+// C++ gibi scope tabanlı:
+// * Kısmen otomatik.
+// * Çalışma zamanı ek yükü yok.
+// 
+// Rust gibi derleyici tarafından zorlanan scope tabanlı:
+// * Derleyici tarafından zorlanır.
+// * Çalışma zamanı ek yükü yok.
+// * Güvenli ve doğru.
+
+// ------ Farklı Bellek Yönetimi Tekniklerinin Eksileri ------
+//
+// C gibi manuel:
+// * Use-after-free.
+// * Double-frees.
+// * Bellek sızıntıları.
+//
+// Java gibi otomatik:
+// * Çöp toplama duraklamaları.
+// * Yıkıcı gecikmeleri.
+//
+// C++ gibi scope tabanlı:
+// * Karmaşık, programcı tarafından tercih edilir.
+// * Use-after-free (kullanım sonrası serbest bırakma) potansiyeli.
+// 
+// Rust gibi derleyici zorlamalı ve kapsam tabanlı:
+// * Bazı ön karmaşıklık ve kompleksite.
+// * Dogru programları reddedebilir.

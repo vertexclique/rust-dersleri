@@ -11,6 +11,12 @@ Egitimler 8 haftaya yayilacaktir.
 8 haftanin sonunda verilen proje odevi gecis notu sayilacaktir.
 Bu projeyi 1 hafta icinde belirtilecek sisteme yuklemeniz gerekmektedir.
 
+Ders anlatimlarindaki ✨ sayisi o asamanin zorlugunu gosterir ve su sekildedir:
+✨: Basit
+✨✨: Dikkat et
+✨✨✨: Calisman lazim
+✨✨✨✨: Kesinlikle cok pratik yapman lazim
+
 ### Gereksinimler
 1. Rust'i yuklemek icin bu adimlari izleyin: https://www.rust-lang.org/tr/tools/install
 2. Kendinizi rahat hissedeceginiz bir IDE veya kod editorunu sisteminize yukleyin.
