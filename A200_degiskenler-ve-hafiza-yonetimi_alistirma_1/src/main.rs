@@ -55,7 +55,7 @@ impl Kutuphane {
 
 // Bu istenen davranışı gösterir. Aşağıdaki kodun yorumunu kaldırın ve
 // eksik yöntemleri uygulayın. "self" parametresi de dahil olmak üzere tum 
-// metod imzalarıni guncellemeniz gerekecek! Yapabilirsin
+// metod imzalarıni guncellemeniz gerekecek! Yapabilirsin!
 // `main` içindeki değişken atamalarini da güncellemeniz gerekebilir.
 fn main() {
     let kutuphane = Kutuphane::new();
