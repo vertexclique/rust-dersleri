@@ -1,0 +1,35 @@
+[package]
+name = "homeworks"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+guid-create = "0.3.0"
+rand = "0.8.5"
+
+[[bin]]
+name="hw_1_numerics"
+path = "src/hw_1_numerics.rs"
+
+[[bin]]
+name="hw_2_transpose_generics"
+path = "src/hw_2_transpose_generics.rs"
+
+[[bin]]
+name="hw_2_transpose_simple"
+path = "src/hw_2_transpose_simple.rs"
+
+[[bin]]
+name="hw_3_library"
+path = "src/hw_3_library.rs"
+
+[[bin]]
+name="hw_4_ls_command"
+path = "src/hw_4_ls_command.rs"
+
+
+[[bin]]
+name="hw_5_health_statistics"
+path = "src/hw_5_health_statistics.rs"
